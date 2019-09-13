@@ -8,17 +8,17 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <form id="docSearch" class="mr-auto">
           <div class="form-inline">
-            <input id="searchInput" class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <input id="searchInput" class="form-control" type="text" placeholder="Search All" aria-label="Search">
             <button class="btn btn-outline-dark btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
           </div>
           <label>Search By:</label>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="searchType" id="range1" value="conditions" checked>
-            <label class="form-check-label" for="range1">Symptom</label>
+            <input class="form-check-input" type="radio" name="searchType" id="range2" value="doctors" checked>
+            <label class="form-check-label" for="range2">Doctor</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="searchType" id="range2" value="doctors">
-            <label class="form-check-label" for="range2">Doctor</label>
+            <input class="form-check-input" type="radio" name="searchType" id="range1" value="conditions">
+            <label class="form-check-label" for="range1">Symptom</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="searchType" id="range3" value="practices">
@@ -62,7 +62,7 @@
           </div>
         </div>
       </form>
-      <div class="results">
+      <div id="results">
 
       </div>
     </div>
