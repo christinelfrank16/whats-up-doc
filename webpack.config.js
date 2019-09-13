@@ -17,7 +17,7 @@ module.exports = {
     new UglifyJsPlugin({ sourceMap: true}),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Galactic Age',
+      title: 'What\'s Up Doc?',
       template: './src/index.html',
       inject: 'body'
     })
