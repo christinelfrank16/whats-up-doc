@@ -17,12 +17,14 @@ $(document).ready(function(){
 
     // direct search for doctor
     if(searchType === 'doctors' && searchTerm === ''){
-      results = callDoc.listResults('doctors');
+      results = callDoc.listResults(searchType);
     } else if(searchType === 'doctors'){
-      results = callDoc.listResults('doctors', searchTerm);
+      results = callDoc.listResults(searchType, searchTerm);
     } else if (searchType === 'symptom'){
       results = callDoc.listResults('doctors', "", searchTerm);
-    } else if (searchType === 'practices')
+    } else if (searchType === 'practices'){
+      results = callDoc.listResults(searchType, searchTerm);
+    }
 
     results.then(function(response){
       const body = JSON.parse(response);
