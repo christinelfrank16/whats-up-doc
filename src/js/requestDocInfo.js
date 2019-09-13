@@ -2,7 +2,7 @@ export class CallDoc {
   constructor(){
     this.apiKey = process.env.exports.apiKey;
     this.baseUrl = 'https://api.betterdoctor.com/2016-03-01';
-    this.location = '37.773,-122.413'; // lat, long '45.5051,122.6750'
+    this.location = '45.5051,-122.6750'; // lat,long
     this.range = 25; //miles
     this.limit = 10;
     this.skipIndex = 0;

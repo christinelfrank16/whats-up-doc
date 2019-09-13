@@ -15,13 +15,14 @@ $(document).ready(function(){
     let callDoc = new CallDoc();
     let results;
 
-    if(searchTerm === ""){
+    // direct search for doctor
+    if(searchType === 'doctors' && searchTerm === ''){
       results = callDoc.listResults('doctors');
     } else if(searchType === 'doctors'){
       results = callDoc.listResults('doctors', searchTerm);
     } else if (searchType === 'symptom'){
       results = callDoc.listResults('doctors', "", searchTerm);
-    }
+    } else if (searchType === 'practices')
 
     results.then(function(response){
       const body = JSON.parse(response);
@@ -33,14 +34,14 @@ $(document).ready(function(){
           displayHtml += displayDoctor(doctorInfo);
         });
         if(displayHtml === ""){
-          displayHtml += `Sorry, no results available for your search.`
+          displayHtml += `Sorry, no results are available for your search.`;
         }
       }
       $('#results').html(displayHtml);
     });
     results.catch(function(error){
       console.log("Error found:", error);
-      $('#results').html(`<div class="errorMsg">There was an error in your request. Please try a different search.</div>`);
+      $('#results').html(`<div class="errorMsg">The following error was received from your request: " ${error}". Please try a different search.</div>`);
     });
 
   });
