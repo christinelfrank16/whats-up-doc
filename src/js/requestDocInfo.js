@@ -6,24 +6,30 @@ export class CallDoc {
     this.range = 25; //miles
     this.limit = 10;
     this.skipIndex = 0;
+    this.gender = 'any';
   }
 
-  buildUrl(value){
-    return `${this.baseUrl}/${value}?location=${this.location},${this.range}&skip=${this.skipIndex}&limit=${this.limit}&user_key=${this.apiKey}`;
+  buildUrl(value, nameSearch, query, gender){
+    nameSearch !== "" ? nameSearch = `name=${nameSearch}&` : nameSearch;
+    query !== "" ? query = `query=${query}&` : query;
+    gender !== "" ? gender = `gender=${gender}&` : gender;
+
+    return `${this.baseUrl}/${value}?${nameSearch}${query}${gender}location=${this.location},${this.range}&skip=${this.skipIndex}&limit=${this.limit}&user_key=${this.apiKey}`;
   }
 
 //inputs: doctors, practices, specialties, conditions
-  listResults(searchType){
+  listResults(searchType, nameSearch = "", query = "", gender=""){
     return new Promise((resolve, reject) => {
       let request = new XMLHttpRequest();
-      const url = this.buildUrl(searchType);
+      const url = this.buildUrl(searchType, nameSearch, query, gender);
       console.log("url", url);
 
       request.onload = function(){
         if (this.status === 200) {
           resolve(request.response);
         } else {
-          reject(Error(request.statusText));
+          console.log(request);
+          reject(new Error(request.statusText));
         }
       }
       request.open("GET", url, true);
