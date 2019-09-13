@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -15,6 +16,9 @@ module.exports = {
   },
   plugins: [
     new UglifyJsPlugin({ sourceMap: true}),
+    new Dotenv({
+      path: path.resolve(__dirname, '.env')
+    }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'What\'s Up Doc?',
