@@ -10,11 +10,18 @@ import { displayDoctor } from './views/doctorView';
 $(document).ready(function(){
   $('#docSearch').submit(function(event){
     event.preventDefault();
-    const searchTerm = $('searchInput').val();
+    const searchTerm = $('#searchInput').val();
     const searchType = $('input:radio[name=searchType]:checked').val();
-    //debugger
     let callDoc = new CallDoc();
-    let results = callDoc.listResults(searchType);
+    let results;
+
+    if(searchTerm === ""){
+      results = callDoc.listResults('doctors');
+    } else if(searchType === 'doctors'){
+      results = callDoc.listResults('doctors', searchTerm);
+    } else if (searchType === 'symptom'){
+      results = callDoc.listResults('doctors', "", searchTerm);
+    }
 
     results.then(function(response){
       const body = JSON.parse(response);
@@ -23,11 +30,17 @@ $(document).ready(function(){
       let displayHtml = '';
       if(result.meta.item_type === "Doctor"){
         result.data.forEach(function(doctorInfo){
-          console.log("Request type", doctorInfo);
           displayHtml += displayDoctor(doctorInfo);
         });
+        if(displayHtml === ""){
+          displayHtml += `Sorry, no results available for your search.`
+        }
       }
       $('#results').html(displayHtml);
+    });
+    results.catch(function(error){
+      console.log("Error found:", error);
+      $('#results').html(`<div class="errorMsg">There was an error in your request. Please try a different search.</div>`);
     });
 
   });

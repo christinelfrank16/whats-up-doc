@@ -22,9 +22,16 @@ export function displayDoctor(doctorInfoArray){
 }
 
 function buildPracticeList(practiceList){
-  let results = '<ul><strong>Practices</strong>';
+  let results = '<ul class="practiceList"><strong>Practices</strong>';
   practiceList.forEach(function(practice){
-    results += `<li><a href="${practice.website}">${practice.name}</a></li>`;
+    results += `<li>
+                  <a href="${practice.website}">${practice.name}</a>
+                  <p class="address">
+                    ${practice.visit_address.street}<br>
+                    ${practice.visit_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}
+                    ${buildPhonesList(practice.phones)}
+                  </p>
+                </li>`;
   });
 
   results += '</ul>';
@@ -32,11 +39,20 @@ function buildPracticeList(practiceList){
 }
 
 function buildSpecialitiesList(specialtyList){
-  let results = '<ul><strong>Specialties</strong>';
+  let results = '<ul class="specialtyList"><strong>Specialties</strong>';
   specialtyList.forEach(function(specialty){
     results += `<li>${specialty.name}</li>`;
   });
-
   results += '</ul>';
+  return results;
+}
+
+function buildPhonesList(phoneList){
+  let results = '';
+  phoneList.forEach(function(phone){
+    const phoneNum = `(${phone.number.substring(0,3)}) ${phone.number.substring(3,6)}-${phone.number.substring(6)}`;
+    const phoneType = phone.type[0].toUpperCase() + phone.type.substring(1);
+    results += `<br>${phoneType}: ${phoneNum}`;
+  });
   return results;
 }
