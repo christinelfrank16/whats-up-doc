@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What's Up Doc?</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <form class="mr-auto">
+          <div class="form-inline">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-dark btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
+          </div>
+          <input type="checkbox" id="showMore">
+          <label for="showMore">Advanced Search Options</label>
+        </form>
+        <a class="navbar-brand" href="#">What's Up Doc?</a>
+      </nav>
+      <form id="moreOptions">
+        <div class="moreOptions">
+          <label>Location: <input type="text" placeholder="Zipcode"></label>
+          <label>Range:</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="range1" value="5">
+            <label class="form-check-label" for="range1">5 miles</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="range2" value="10">
+            <label class="form-check-label" for="range2">10 miles</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="range3" value="20">
+            <label class="form-check-label" for="range3">20 miles</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label" for="range4">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="range4" value="other">
+              Custom
+            <input class="form-check-input" type="text" name="inlineRadioOptions" id="customRange">
+          </label>
+          </div>
+        </div>
+      </form>
+      <div class="results">
+
+      </div>
+    </div>
+  </body>
+</html>
