@@ -36,4 +36,23 @@ export class CallDoc {
       request.send();
     });
   }
+
+  listDoctorByPracticeResults(practiceUid){
+    return new Promise((resolve,reject) => {
+      let request = new XMLHttpRequest();
+      const url = `${this.baseUrl}/practices/${practiceUid}/doctors?skip=${this.skipIndex}&limit=${this.limit}&user_key=${this.apiKey}`;
+      console.log("url", url);
+
+      request.onload = function(){
+        if (this.status === 200) {
+          resolve(request.response);
+        } else {
+          console.log(request);
+          reject(new Error(request.statusText));
+        }
+      }
+      request.open("GET", url, true);
+      request.send();
+    });
+  }
 }

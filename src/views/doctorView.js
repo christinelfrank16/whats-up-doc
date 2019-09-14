@@ -22,20 +22,23 @@ export function displayDoctor(doctorInfoArray){
 }
 
 function buildPracticeList(practiceList){
-  let results = '<ul class="practiceList"><strong>Practices</strong>';
-  practiceList.forEach(function(practice){
-    results += `<li>
-                  <a href="${practice.website}">${practice.name}</a>
-                  <p class="address">
-                    ${practice.visit_address.street}<br>
-                    ${practice.visit_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}
-                    ${buildPhonesList(practice.phones)}
-                  </p>
-                  <p class="new-patients">Is ${practice.accepts_new_patients ? "" : "<strong>not</strong> "} accepting new patients</p>
-                </li>`;
-  });
+  let results = '';
+  if(practiceList){
+    results = '<ul class="practiceList"><strong>Practices</strong>';
+    practiceList.forEach(function(practice){
+      results += `<li>
+      <a href="${practice.website}">${practice.name}</a>
+      <p class="address">
+      ${practice.visit_address.street}<br>
+      ${practice.visit_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}
+      ${buildPhonesList(practice.phones)}
+      </p>
+      <p class="new-patients">Is ${practice.accepts_new_patients ? "" : "<strong>not</strong> "} accepting new patients</p>
+      </li>`;
+    });
 
-  results += '</ul>';
+    results += '</ul>';
+  }
   return results;
 }
 
