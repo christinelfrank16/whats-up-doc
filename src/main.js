@@ -6,13 +6,19 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import './styles.css';
 import {CallDoc} from './js/requestDocInfo.js';
 import { displayDoctor } from './views/doctorView';
+import { convertZipCode } from './models/convertZipCode.js';
 
 $(document).ready(function(){
   $('#docSearch').submit(function(event){
     event.preventDefault();
     const searchTerm = $('#searchInput').val();
     const searchType = $('input:radio[name=searchType]:checked').val();
+    const zipcode = $('#zipcode').val();
     let callDoc = new CallDoc();
+    if(zipcode){
+      callDoc.location = convertZipCode(zipcode);
+      console.log(zipcode, callDoc.location);
+    }
     let results;
 
     // direct search for doctor

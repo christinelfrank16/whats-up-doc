@@ -31,6 +31,7 @@ function buildPracticeList(practiceList){
                     ${practice.visit_address.city}, ${practice.visit_address.state} ${practice.visit_address.zip}
                     ${buildPhonesList(practice.phones)}
                   </p>
+                  <p class="new-patients">Is ${practice.accepts_new_patients ? "" : "<strong>not</strong> "} accepting new patients</p>
                 </li>`;
   });
 
