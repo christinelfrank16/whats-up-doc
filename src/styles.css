@@ -1,0 +1,71 @@
+body {
+  height: 900px;
+  background-color: #FFFDE9;
+}
+
+.container {
+  height: inherit;
+}
+
+.row {
+  height: 100%;
+  margin: 0;
+}
+
+#moreOptions {
+  display: none;
+  border: 1px solid grey;
+  padding: 15px;
+}
+#location-group {
+  margin-right: 15px;
+}
+
+.navbar h2 {
+  font-family: 'Rock Salt', cursive;
+}
+
+.col-2 {
+  background-color: #A1E1FF;
+  margin: 0;
+  padding-top: 15px;
+}
+
+#searchInput {
+  width: 75%;
+  float: left;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+#search-btn {
+  width: 25%;
+  margin: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.form-inline {
+  margin-bottom: 10px;
+}
+
+.card {
+  margin: 8px 0;
+  padding: 10px;
+}
+
+.card-body {
+  height: 150px;
+  overflow: hidden;
+}
+
+.fullSize {
+  height: 100%;
+}
+
+.show-btns {
+  margin: 8px 0;
+}
+
+.less {
+  display: none;
+  margin-top: 15px;
+}

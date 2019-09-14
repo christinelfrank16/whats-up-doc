@@ -13,6 +13,13 @@ export function displayDoctor(doctorInfoArray){
             <p class="card-text">${doctorInfoArray.profile.bio}</p>
             ${buildPracticeList(doctorInfoArray.practices)}
             ${buildSpecialitiesList(doctorInfoArray.specialties)}
+            <button class="less" type="button">Show Less</button>
+          </div>
+          <div class="dots">
+            <p>...</p>
+          </div>
+          <div class="show-btns">
+            <button class="more" type="button">Show More</button>
           </div>
         </div>
       </div>

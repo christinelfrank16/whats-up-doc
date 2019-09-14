@@ -9,12 +9,11 @@ import { displayDoctor } from './views/doctorView';
 import { convertZipCode } from './models/advancedSearch.js';
 
 $(document).ready(function(){
+  let callDoc = new CallDoc();
   $('#docSearch').submit(function(event){
     event.preventDefault();
-    let callDoc = new CallDoc();
     const searchTerm = $('#searchInput').val();
     const searchType = $('input:radio[name=searchType]:checked').val();
-    checkAdvSearchInput(callDoc);
     let results;
 
     // direct search for doctor
@@ -50,21 +49,36 @@ $(document).ready(function(){
       $('#results').html(displayHtml);
     })
     .then((responseList) => {
-      let displayHtml = '';
-      console.log("Made request2", responseList);
-      responseList.forEach((response) => {
-        let practiceDocResp = JSON.parse(response);
-        const result = practiceDocResp;
-        console.log("Made request", result);
-        result.data.forEach(function(doctorInfo){
-          displayHtml += displayDoctor(doctorInfo);
+      if(responseList){
+        let displayHtml = '';
+        console.log("Made request2", responseList);
+        responseList.forEach((response) => {
+          let practiceDocResp = JSON.parse(response);
+          const result = practiceDocResp;
+          console.log("Made request", result);
+          result.data.forEach(function(doctorInfo){
+            displayHtml += displayDoctor(doctorInfo);
+          });
         });
-      });
+      }
     });
     results.catch(function(error){
       console.log("Error found:", error);
       $('#results').html(`<div class="errorMsg">The following error was received from your request: " ${error}". Please try a different search.</div>`);
     });
+  });
+
+  $('#showMore-label').click(function(){
+    if($('#showMore').prop('checked') === true){
+      $('#moreOptions').slideDown();
+    } else {
+      $('#moreOptions').slideUp();
+    }
+  });
+
+  $('#locationOptions').submit(function(event){
+    event.preventDefault();
+    checkAdvSearchInput(callDoc)
   });
 
   $('#range4-label').click(function(event){
@@ -73,7 +87,23 @@ $(document).ready(function(){
     } else {
       $('#customRange').select();
     }
+  });
 
+  $('#results').on('click', '.more', function(){
+    const card = $(this).closest(".card");
+    console.log("click", card);
+    card.find('.card-body').addClass('fullSize');
+    card.find('.dots').hide();
+    card.find('.less').show();
+    $(this).hide();
+  });
+
+    $('#results').on('click', '.less', function(){
+    const card = $(this).closest(".card");
+    card.find('.card-body').removeClass('fullSize');
+    card.find('.dots').show();
+    card.find('.more').show();
+    $(this).hide();
   });
 });
 
