@@ -16,9 +16,16 @@ body {
   display: none;
   border: 1px solid grey;
   padding: 15px;
+  background-color: #7EA5C0;
 }
 #location-group {
   margin-right: 15px;
+}
+
+#saveSearchOptions{
+  position: relative;
+  float: right;
+  bottom: 3.25em;
 }
 
 .navbar h2 {
