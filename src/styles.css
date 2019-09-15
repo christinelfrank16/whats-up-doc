@@ -25,14 +25,14 @@ body {
   font-family: 'Rock Salt', cursive;
 }
 
-.col-2 {
+.col-3 {
   background-color: #A1E1FF;
   margin: 0;
   padding-top: 15px;
 }
 
 #searchInput {
-  width: 75%;
+  width: 70%;
   float: left;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
@@ -68,4 +68,8 @@ body {
 .less {
   display: none;
   margin-top: 15px;
+}
+
+.specials {
+  padding-left: 8px;
 }

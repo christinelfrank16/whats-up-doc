@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import './styles.css';
 import {CallDoc} from './js/requestDocInfo.js';
 import { displayDoctor } from './views/doctorView';
+import { displayPractice } from './views/practiceView.js';
 import { convertZipCode } from './models/advancedSearch.js';
 
 $(document).ready(function(){
@@ -24,14 +25,12 @@ $(document).ready(function(){
     } else if (searchType === 'symptom'){
       results = callDoc.listResults('doctors', "", searchTerm);
     } else if (searchType === 'practices'){
-      callDoc.limit = 1;
       results = callDoc.listResults(searchType, searchTerm);
     }
 
     results.then(function(response){
       const body = JSON.parse(response);
       const result = body;
-      console.log("Made request", result);
       let displayHtml = '';
       if(result.meta.item_type === "Doctor"){
         result.data.forEach(function(doctorInfo){
@@ -41,29 +40,16 @@ $(document).ready(function(){
           displayHtml += `Sorry, no results are available for your search.`;
         }
       } else if (result.meta.item_type === "Practice"){
-        let promises = result.data.map(function(practice){
-          return callDoc.listDoctorByPracticeResults(practice.uid);
+        result.data.forEach(function(practice){
+          displayHtml += displayPractice(practice);
         });
-        return Promise.all(promises);
+        if(displayHtml === ""){
+          displayHtml += `Sorry, no results are available for your search.`;
+        }
       }
       $('#results').html(displayHtml);
-    })
-    .then((responseList) => {
-      if(responseList){
-        let displayHtml = '';
-        console.log("Made request2", responseList);
-        responseList.forEach((response) => {
-          let practiceDocResp = JSON.parse(response);
-          const result = practiceDocResp;
-          console.log("Made request", result);
-          result.data.forEach(function(doctorInfo){
-            displayHtml += displayDoctor(doctorInfo);
-          });
-        });
-      }
     });
     results.catch(function(error){
-      console.log("Error found:", error);
       $('#results').html(`<div class="errorMsg">The following error was received from your request: " ${error}". Please try a different search.</div>`);
     });
   });
@@ -91,7 +77,6 @@ $(document).ready(function(){
 
   $('#results').on('click', '.more', function(){
     const card = $(this).closest(".card");
-    console.log("click", card);
     card.find('.card-body').addClass('fullSize');
     card.find('.dots').hide();
     card.find('.less').show();
